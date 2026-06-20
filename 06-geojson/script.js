@@ -12,12 +12,16 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 async function renderCyclingPaths() {
-  // ===============
-  // Step 2 onwards
-  // ===============
+  // ========
+  // Step 2
+  // ========
   let response = await axios.get("data/cycle.geojson");
   let cyclingLayer = L.geoJson(response.data, {
-    onEachFeature: function (feature, layer) {      
+    onEachFeature: function (feature, layer) {
+      // you can remove the previous code before the following...
+      // ========
+      // Step 4
+      // ========
       layer.bindPopup(`<div>
                   <p>
                        Region: ${feature.properties.CYL_PATH}
@@ -26,12 +30,16 @@ async function renderCyclingPaths() {
                        Department: ${feature.properties.AGENCY_MAINT}
                   </p>
                </div>`);
+      // ===============
+      // End of Step 4
+      // ===============
+      // you can remove the previous code after the above...
     },
   }).addTo(map);
 
-  // ===============
-  // Step 3 onwards
-  // ===============
+  // ========
+  // Step 3
+  // ========
   cyclingLayer.setStyle({
     color: "red",
   });
